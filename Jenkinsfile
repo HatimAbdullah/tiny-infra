@@ -2,7 +2,7 @@ pipeline {
   agent {
     dockerfile {
       filename 'Dockerfile'
-      args '-u root'
+      args '-u ubuntu'
     }
 
   }
