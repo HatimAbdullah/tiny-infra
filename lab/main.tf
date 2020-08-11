@@ -45,7 +45,7 @@ data "aws_ami" "latest_webserver" {
 
   filter {
     name   = "name"
-    values = "fish-to-mars*"
+    values = ["fish-to-mars*"]
   }
 }
 
