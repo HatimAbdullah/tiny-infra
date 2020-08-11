@@ -16,6 +16,20 @@ env
       }
     }
 
+   stage('prepare and plan') {
+      steps {
+          sh 'make init'
+          sh 'time terraform plan -out plan.out'
+      }
+    }
+
+    stage('Release') {
+      steps {
+        sh 'terraform apply plan.out'
+      }
+    }
+
+
   }
   environment {
     CREDS = credentials('fish-creds')
