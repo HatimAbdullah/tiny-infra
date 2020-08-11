@@ -2,7 +2,7 @@ pipeline {
   agent {
     dockerfile {
       filename 'Dockerfile'
-      args '-v /home/$USER:/home/$USER -e HOME=/home/$USER -w /home/$USER -u ubuntu"
+      args '-v /home/$USER:/home/$USER -e HOME=/home/$USER -w /home/$USER -u ubuntu'
     }
 
   }
