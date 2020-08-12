@@ -11,6 +11,7 @@ pipeline {
         sh """
 find . -type d -exec chmod a+rwx {} \\;
 find . -type f -exec chmod a+rw {} \\;
+chmod -R a+rwx .terraform
 ls
 pwd
 env
