@@ -36,7 +36,7 @@ env
         sh '''
 	terraform output -json > machines-info
         cat > machines-info
-        pwd	
+        ls -a	
 	'''
       }
     }
