@@ -9,8 +9,8 @@ pipeline {
     stage('Validate Environment') {
       steps {
         sh """
-find . -type d -exec chmod a+rwx {} \;
-find . -type f -exec chmod a+rw {} \;
+find . -type d -exec chmod a+rwx {} \\;
+find . -type f -exec chmod a+rw {} \\;
 ls
 pwd
 env
