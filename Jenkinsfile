@@ -26,7 +26,7 @@ env
 
     stage('Release') {
       steps {
-        sh 'terraform apply plan.out -lock=false'
+        sh 'terraform apply -lock=false plan.out'
       }
     }
    
