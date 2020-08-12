@@ -155,7 +155,7 @@ resource "aws_instance" "webserver" {
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.webserver[count.index].id
   vpc_security_group_ids      = [aws_security_group.webserver.id]
-  key_name                    = "fishtoearth"
+  key_name                    = aws_key_pair.blue.id
   associate_public_ip_address = true
   tags                        = module.tags_webserver.tags
   depends_on                  = [aws_instance.api]
@@ -167,7 +167,7 @@ resource "aws_instance" "api" {
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.webserver[count.index].id
   vpc_security_group_ids      = [aws_security_group.webserver.id]
-  key_name                    = "fishtoearth"
+  key_name                    = aws_key_pair.blue.id
   associate_public_ip_address = true
   tags                        = module.tags_webserver.tags
 }
@@ -177,6 +177,19 @@ resource "aws_instance" "bastion" {
   instance_type          = "t3.micro"
   subnet_id              = aws_subnet.bastion.id
   vpc_security_group_ids = [aws_security_group.bastion.id]
-  key_name               = "fishtoearth"
+  key_name               = aws_key_pair.blue.id
   tags                   = module.tags_bastion.tags
+}
+
+resource "random_id" "keypair" {
+  keepers = {
+    public_key = file(var.public_key_path)
+  }
+
+  byte_length = 8
+}
+
+resource "aws_key_pair" "blue" {
+  key_name   = format("fish_keypair_%s", random_id.keypair.hex)
+  public_key = random_id.keypair.keepers.public_key
 }

@@ -46,5 +46,7 @@ connect:
 	ssh -i ssh/id_rsa ubuntu@$$(terraform output -json | jq '.bastion_ip.value' | xargs)
 
 init:
-	rm -rf .terraform
+	rm -rf .terraform ssh
+	mkdir ssh
 	time terraform init
+	ssh-keygen -t rsa -f ./ssh/id_rsa -q -N ""

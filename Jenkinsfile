@@ -26,7 +26,7 @@ env
 
     stage('Release') {
       steps {
-        sh 'terraform apply plan.out'
+        sh 'terraform apply plan.out -lock=false'
       }
     }
    
@@ -34,7 +34,8 @@ env
       steps {
         sh '''
 	terraform output -json > machines-info
-        cat machines-info	
+        scp -i ssh/id_rsa machines-info ubuntu@$$(terraform output -json | jq '.bastion_ip.value' | xargs):~
+        cat machines-info
 	'''
       }
     }
