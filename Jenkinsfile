@@ -1,10 +1,9 @@
 pipeline {
   agent {
-    dockerfile {
-      filename 'Dockerfile'
-      args '-u root'      
+    docker {
+      image "bryandollery/terraform-packer-aws-alpine"
+      args "-u root --entrypoint='' --rm"
     }
-
   }
   stages {
     stage('Validate Environment') {
