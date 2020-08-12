@@ -8,13 +8,13 @@ pipeline {
   stages {
     stage('Validate Environment') {
       steps {
-        sh '''
-chmod -R a+rwx *
-chmod a+rwx *
+        sh """
+find . -type d -exec chmod a+rwx {} \;
+find . -type f -exec chmod a+rw {} \;
 ls
 pwd
 env
-'''
+"""
       }
     }
 
