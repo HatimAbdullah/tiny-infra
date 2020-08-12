@@ -18,8 +18,8 @@ env
 
    stage('prepare and plan') {
       steps {
-          sh 'make init'
-          sh 'chmod -R a+rwx .terraform ssh'
+         // sh 'make init'
+         // sh 'chmod -R a+rwx .terraform ssh'
           sh 'time terraform plan -out plan.out -lock=false'
       }
     }
@@ -34,7 +34,7 @@ env
       steps {
         sh '''
 	terraform output -json > machines-info
-        scp -i ssh/id_rsa machines-info ubuntu@$$(terraform output -json | jq '.bastion_ip.value' | xargs):~
+        scp -i ssh/id_rsa machines-info ubuntu@$(terraform output -json | jq '.bastion_ip.value' | xargs):~
         cat machines-info
 	'''
       }
