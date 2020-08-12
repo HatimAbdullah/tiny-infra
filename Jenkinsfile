@@ -11,7 +11,6 @@ pipeline {
         sh """
 find . -type d -exec chmod a+rwx {} \\;
 find . -type f -exec chmod a+rw {} \\;
-chmod -R a+rwx .terraform
 ls
 pwd
 env
@@ -22,6 +21,7 @@ env
    stage('prepare and plan') {
       steps {
           sh 'make init'
+          sh 'chmod -R a+rwx .terraform'
           sh 'time terraform plan -out plan.out -lock=false'
       }
     }
