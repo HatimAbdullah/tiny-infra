@@ -159,6 +159,20 @@ resource "aws_instance" "webserver" {
   associate_public_ip_address = true
   tags                        = module.tags_webserver.tags
   depends_on                  = [aws_instance.api]
+
+connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    private_key = file("ssh/id_rsa")
+    host        = self.public_ip
+  }
+
+ provisioner "remote-exec" {
+    inline = [
+      "echo ${aws_instance.api.0.public_ip} > api_ip"
+    ]
+  }
+
 }
 
 resource "aws_instance" "api" {
@@ -180,6 +194,7 @@ resource "aws_instance" "bastion" {
   key_name               = aws_key_pair.blue.id
   tags                   = module.tags_bastion.tags
 }
+
 
 resource "random_id" "keypair" {
   keepers = {

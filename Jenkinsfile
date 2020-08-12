@@ -34,8 +34,6 @@ env
       steps {
         sh '''
 	terraform output -json > machines-info
-        terraform output -json | jq '.bastion_ip.value' | xargs >> /.ssh/known_hosts
-        scp -i ssh/id_rsa machines-info ubuntu@$(terraform output -json | jq '.bastion_ip.value' | xargs):~
         cat machines-info
 	'''
       }
