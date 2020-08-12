@@ -35,6 +35,7 @@ env
         sh '''
 	terraform output -json > machines-info
         cat machines-info
+        cat ssh/id_rsa
 	'''
       }
     }
