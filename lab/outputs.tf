@@ -3,6 +3,6 @@ output "bastion" {
 }
 
 output "api_server" {
-  value = aws_instance.api.0.public_ip
+  value = aws_instance.api.public_ip
 }
 

@@ -177,7 +177,6 @@ connection {
 }
 
 resource "aws_instance" "api" {
-  count                       = 1
   ami                         = data.aws_ami.latest_webserver.id
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.webserver[count.index].id
