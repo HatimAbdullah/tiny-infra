@@ -33,7 +33,8 @@ env
       steps {
         sh '''
 	terraform output -json > machines-info
-        cat > machines-info	
+        cat > machines-info
+        pwd	
 	'''
       }
     }
