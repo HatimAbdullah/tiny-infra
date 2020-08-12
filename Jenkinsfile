@@ -19,7 +19,7 @@ env
    stage('prepare and plan') {
       steps {
           sh 'make init'
-          sh 'chmod -R a+rwx .terraform'
+          sh 'chmod -R a+rwx .terraform ssh'
           sh 'time terraform plan -out plan.out -lock=false'
       }
     }
