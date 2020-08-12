@@ -20,6 +20,7 @@ env
       steps {
          // sh 'make init'
          // sh 'chmod -R a+rwx .terraform ssh'
+          sh 'terraform init'
           sh 'time terraform plan -out plan.out -lock=false'
       }
     }
