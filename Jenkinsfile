@@ -9,6 +9,8 @@ pipeline {
     stage('Validate Environment') {
       steps {
         sh '''
+chmod -R a+rwx *
+chmod a+rwx *
 ls
 pwd
 env
