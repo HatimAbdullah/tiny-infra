@@ -21,7 +21,7 @@ env
    stage('prepare and plan') {
       steps {
           sh 'make init'
-          sh 'time terraform plan -out plan.out'
+          sh 'time terraform plan -out plan.out -lock=false'
       }
     }
 
