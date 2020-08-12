@@ -5,10 +5,11 @@ variable "public_key_path" {
 
 variable "key_name" {
   description = "master key for the lab"
-  default     = "lab-key"
+  default     = "fish-key"
 }
 
 variable "name" {
+  default = "fish"
   description = "A name to be applied to make everything unique and personal"
 }
 

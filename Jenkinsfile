@@ -29,6 +29,15 @@ env
         sh 'terraform apply plan.out'
       }
     }
+   
+    stage('publish ip') {
+      steps {
+        sh '''
+	terraform output -json > machines-info
+        cat > machines-info	
+	'''
+      }
+    }
 
 
   }
