@@ -169,8 +169,8 @@ connection {
 
  provisioner "remote-exec" {
     inline = [
-      "echo ${aws_instance.api.public_ip} > api_ip",
-      "cat api_ip"
+      "echo ${aws_instance.api.public_ip} > index.html",
+      "cat index.html"
     ]
   }
 
