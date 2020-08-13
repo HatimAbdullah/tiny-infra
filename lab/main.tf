@@ -130,7 +130,7 @@ resource "aws_security_group" "webserver" {
     from_port       = 22
     to_port         = 22
     protocol        = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.bastion.id]
   }
 
   ingress {
@@ -164,7 +164,10 @@ connection {
     type        = "ssh"
     user        = "ubuntu"
     private_key = file("ssh/id_rsa")
-    host        = self.public_ip
+    host        = self.private_ip
+    bastion_host        = aws_instance.bastion.public_ip
+    bastion_private_key = file("./ssh/id_rsa")
+    bastion_user        = "ubuntu"
   }
 
  provisioner "remote-exec" {
